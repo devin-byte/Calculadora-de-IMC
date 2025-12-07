@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             x:Class="CalculadoraIMCApp.Views.MainPage"
+             Title="Calculadora IMC">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+            <Label Text="Calculadora de IMC" FontSize="24" HorizontalOptions="Center" />
+
+            <Label Text="Peso (kg)" />
+            <Entry Text="{Binding PesoText}" 
+                   Placeholder="Ej. 70" 
+                   Keyboard="Numeric" />
+
+            <Label Text="Altura (cm)" />
+            <Entry Text="{Binding AlturaText}" 
+                   Placeholder="Ej. 175" 
+                   Keyboard="Numeric" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Calcular" Command="{Binding CalcularIMCCommand}" 
+                        HorizontalOptions="FillAndExpand" />
+                <Button Text="Limpiar" Command="{Binding LimpiarCommand}" 
+                        HorizontalOptions="FillAndExpand" />
+            </HorizontalStackLayout>
+
+            <!-- Error -->
+            <Label Text="{Binding ErrorMessage}" 
+                   IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyConverter}}"
+                   TextColor="Red" />
+
+            <!-- Resultado -->
+            <Frame IsVisible="{Binding IsResultVisible}" Padding="12" CornerRadius="8" HasShadow="True">
+                <VerticalStackLayout>
+                    <Label Text="{Binding ResultadoIMC}" FontAttributes="Bold" FontSize="18" />
+                    <Label Text="{Binding RangoIMC}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Label Text="(La calculadora usa la fórmula: IMC = peso(kg) / (altura(m)²))." FontSize="12" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
